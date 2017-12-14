@@ -20,9 +20,10 @@ const Answer = ({ answer, onClick }) => {
                 <Icon name={iconName} color={answerColor} size='large' />
                 {answer.decision === WILL_COME && answer.withMe > 0? <Label color='green'>{answer.withMe}</Label>: null}
             </List.Content>
-            <Image avatar src={answer.userAvatar} />
+            <Image avatar src='https://randomuser.me/api/portraits/men/48.jpg' />
             <List.Content>
-                <Header color='green'>{answer.userName}</Header>
+                <Header color={answer.id === localStorage.currentUserId? 'green': 'grey'}>{answer.userName}</Header>
+                <List.Description>id: {answer.id}</List.Description>
             </List.Content>
         </List.Item>
     )

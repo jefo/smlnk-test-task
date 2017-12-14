@@ -25,14 +25,11 @@ export default class Main extends React.Component {
             }
         }));
         let answers = JSON.parse(localStorage.answers || '{}');
-        if (Object.values(answers).length === 0) {
+        if (!localStorage.currentUserId) {
             localStorage.currentUserId = new Date().getTime();
         }
         const answer = answers[localStorage.currentUserId] || { id: localStorage.currentUserId };        
         answers = Object.values(answers);
-        answers.forEach((answer) => {
-            answer.isFromCurrentUser = localStorage.currentUserId === answer.id;
-        });
         this.setState({ answers, answer });
     }
 
@@ -70,6 +67,9 @@ export default class Main extends React.Component {
     }
 
     onAnswerItemClick(answer) {
+        if(answer.id !== localStorage.currentUserId) {
+            return;
+        }
         this.setState({
             showModal: true,
             modalFor: answer

@@ -12,7 +12,11 @@ export default class AnswerForm extends React.Component {
     }
 
     componentWillMount() {
-        this.setState(this.props.answer);
+        let answer = Object.assign({}, this.props.answer);
+        if (!answer.withMe) {
+            answer.withMe = 0;
+        }
+        this.setState(answer);
     }
 
     render() {
@@ -32,11 +36,12 @@ export default class AnswerForm extends React.Component {
         }
         return (
             <Form>
-                {this.state.isSubmit? <Segment inverted color='green'>Saved.</Segment>: null}
+                {this.state.isSubmit ? <Segment inverted color='green'>Saved.</Segment> : null}
+                <Form.Input name='id' label='id' onChange={this.handleChange} value={this.state.id} />
                 <Form.Input name='userName' label='Me' onChange={this.handleChange} value={this.state.userName} />
                 <Form.Group inline>
                     <label>With me</label>
-                    <Form.Input name='withMe' type='number' onChange={this.handleChange} value={this.state.withMe} />
+                    <Form.Input name='withMe' type='number' min="0" onChange={this.handleChange} value={this.state.withMe} />
                 </Form.Group>
                 <Form.Select name='decision' options={decisions} onChange={this.handleSelectChange} value={this.state.decision} />
                 <Button type='submit' onClick={this.onSubmit}>Send</Button>

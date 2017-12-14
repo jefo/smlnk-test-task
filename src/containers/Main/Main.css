@@ -6,3 +6,8 @@
 .answer-item_current-user .header {
     cursor: pointer;
 }
+
+.description {
+    font-size: 12px;
+    color: grey;
+}
