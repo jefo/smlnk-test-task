@@ -1,7 +1,7 @@
 import { List, Button, Icon, Image, Label, Header } from 'semantic-ui-react';
 import { NO_ANSWER, WILL_COME, WILL_NOT_COME } from '../constants';
 
-const Answer = ({ answer }) => {
+const Answer = ({ answer, onClick }) => {
     let answerColor;
     let iconName;
     let title;
@@ -15,12 +15,12 @@ const Answer = ({ answer }) => {
         title = 'Will not come';
     }
     return (
-        <List.Item className={answer.isFromCurrentUser? 'answer-item_current-user': ''} title={title}>
+        <List.Item onClick={() => onClick(answer)} className={answer.id === localStorage.currentUserId? 'answer-item_current-user': ''} title={title}>
             <List.Content floated='right'>
                 <Icon name={iconName} color={answerColor} size='large' />
                 {answer.decision === WILL_COME && answer.withMe > 0? <Label color='green'>{answer.withMe}</Label>: null}
             </List.Content>
-            <Image avatar src='/assets/images/avatar/small/molly.png' />
+            <Image avatar src={answer.userAvatar} />
             <List.Content>
                 <Header color='green'>{answer.userName}</Header>
             </List.Content>
@@ -29,10 +29,10 @@ const Answer = ({ answer }) => {
 }
 
 
-const AnswersList = ({ answers }) => {
+const AnswersList = ({ answers, onItemClick }) => {
     answers = Object.values(answers).filter(a => a.decision !== NO_ANSWER)
     const content = answers.length ?
-        answers.map(a => <Answer key={a.id} answer={a} />) :
+        answers.map(a => <Answer onClick={onItemClick} key={a.id} answer={a} />) :
         <List.Item>
             <List.Content>
                 No answers yet.
