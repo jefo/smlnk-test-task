@@ -1,0 +1,23 @@
+{
+  "name": "smlnk-test-task",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/jefo/smlnk-test-task.git",
+  "author": "jefo <johnyjefo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "neutrino start --use @neutrinojs/react",
+    "build": "neutrino build --use @neutrinojs/react"
+  },
+  "devDependencies": {
+    "@neutrinojs/react": "^8.0.13",
+    "neutrino": "^8.0.13",
+    "neutrino-preset-react": "^7.4.0"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.1"
+  }
+}
